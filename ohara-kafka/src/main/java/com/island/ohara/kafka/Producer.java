@@ -56,7 +56,7 @@ public interface Producer<Key, Value> extends Releasable {
       implements com.island.ohara.common.pattern.Builder<Producer<Key, Value>> {
     private Map<String, String> options = Collections.emptyMap();
     private String connectionProps;
-    // default noAcks
+    // default number of acks is 1.
     private short numberOfAcks = 1;
     private Serializer<Key> keySerializer = null;
     private Serializer<Value> valueSerializer = null;
@@ -76,13 +76,13 @@ public interface Producer<Key, Value> extends Releasable {
       return this;
     }
 
-    @com.island.ohara.common.annotations.Optional("default is no ack")
+    @com.island.ohara.common.annotations.Optional("default number of acks is 1.")
     public Builder<Key, Value> noAcks() {
       this.numberOfAcks = 0;
       return this;
     }
 
-    @com.island.ohara.common.annotations.Optional("default is no ack")
+    @com.island.ohara.common.annotations.Optional("default number of acks is 1.")
     public Builder<Key, Value> allAcks() {
       this.numberOfAcks = -1;
       return this;
